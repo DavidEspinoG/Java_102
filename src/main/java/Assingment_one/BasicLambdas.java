@@ -1,3 +1,5 @@
+package Assingment_one;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -62,7 +64,7 @@ public class BasicLambdas {
     }
     public  void consumer () {
         Printable<String> printable = s -> System.out.println(s);
-        printable.print("Printable Lambda");
+        printable.print("Assingment_one.Printable Lambda");
         Consumer<String> myConsumer = s -> System.out.println(s);
         myConsumer.accept("Printing using a consumer");
         Consumer<String> myConsumer2 = System.out::println;
