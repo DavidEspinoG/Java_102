@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 public class Assignment_three {
     public static void main(String[] args) {
 
-        fourB();
+        fiveA();
     }
 
     public static void one() {
@@ -56,4 +56,36 @@ public class Assignment_three {
         System.out.println(oldest.get());
     }
 
+    public static void fourC() {
+        List<Integer> integers = List.of(10, 47, 33, 23);
+        Optional<Integer> result = integers.stream()
+                .reduce(Integer::max);
+        result.ifPresent(System.out::println);
+
+        Integer resultB = integers.stream()
+                .reduce(Integer.MIN_VALUE, Integer::max);
+        System.out.println(resultB);
+
+    }
+
+    public static Optional<String> getGrade(int marks) {
+        Optional<String> grade = Optional.empty();
+        if(marks > 50) {
+            grade = Optional.of("Pass");
+        } else {
+            grade = Optional.of("Fail");
+        }
+        return grade;
+    }
+
+    public static void fiveA() {
+        Optional<String> grade1 = getGrade(50);
+        Optional<String> grade2 = getGrade(55);
+
+        System.out.println(grade1.orElse("Unknown"));
+
+        if(grade2.isPresent()) {
+            grade2.ifPresent(System.out::println);
+        }
+    }
 }
