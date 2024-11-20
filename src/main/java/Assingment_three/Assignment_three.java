@@ -1,12 +1,13 @@
 package Assingment_three;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Assignment_three {
     public static void main(String[] args) {
 
-        fiveA();
+        seven();
     }
 
     public static void one() {
@@ -87,5 +88,36 @@ public class Assignment_three {
         if(grade2.isPresent()) {
             grade2.ifPresent(System.out::println);
         }
+    }
+
+    public static void six() {
+        List<Book> books = List.of(
+                new Book("Thinking in Java", 30),
+                new Book("Java in 24 hrs", 20),
+                new Book("Java Recipes", 10)
+        );
+        double result = books.stream()
+                .mapToDouble(Book::getPrice)
+                .filter(number -> number > 90)
+                .average()
+                .orElse(0.0);
+        System.out.println(result);
+    }
+
+    public static void seven() {
+        List<Book> books = List.of(
+            new Book("Atlas Shrugged", 10.0),
+            new Book("Freedom at Midnight", 5.0),
+            new Book("Gone with the wind", 5.0)
+        );
+
+        Map<String, Double> booksMap = books.stream()
+                .collect(Collectors.toMap(Book::getTitle, Book::getPrice));
+        booksMap.forEach((title, price) -> {
+            if(title.startsWith("A")) {
+                System.out.println(price);
+            }
+        });
+        System.out.println(booksMap);
     }
 }
