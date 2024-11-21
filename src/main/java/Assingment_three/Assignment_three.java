@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 public class Assignment_three {
     public static void main(String[] args) {
 
-        seven();
+        eight();
     }
 
     public static void one() {
@@ -120,4 +120,29 @@ public class Assignment_three {
         });
         System.out.println(booksMap);
     }
+
+    public static void eight() {
+        List<Book> books = List.of(
+                new Book("Gone with the wind", 5.0),
+                new Book("Gone with the wind", 10.0),
+                new Book("Atlas shrugged", 15.0)
+        );
+        books.stream()
+                .collect(Collectors.toMap(Book::getTitle, Book::getPrice, (a, b) -> a + b))
+                .forEach((title, price) -> System.out.println("Price: " + price + " Title: " + title));
+
+    }
+
+    public static void nine() {
+        List<Person> people = List.of(
+                new Person("Bob", "Sanchez", 31 ),
+                new Person("Paul", "Jimenez", 32),
+                new Person("John", "Marquez", 33)
+        );
+        integer result = people.stream()
+                .filter(person -> person.getAge() > 30)
+                .mapToInt(person -> person.getAge())
+                .average();
+    }
+
 }
