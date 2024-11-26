@@ -1,12 +1,14 @@
 package Assingment_three;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Assignment_three {
     public static void main(String[] args) {
-        tenB();
+        fourteenB();
     }
 
     public static void one() {
@@ -145,12 +147,90 @@ public class Assignment_three {
     }
 
     public static void tenA() {
-        Optional<Double> price = Optional.ofNullable(null);
+        Optional<Double> price = Optional.ofNullable(20.0);
         if(price.isPresent()) System.out.println(price.get());
         System.out.println(price.orElse(0.0));
         System.out.println(price.orElseGet(() -> 0.0));
     }
-    //public static void tenB() {
-        //Optional<Double> priceTwo = Optional.ofNullable(null);
-    //}
+    public static void tenB() {
+        Optional<Double> priceTwo = Optional.ofNullable(null);
+        System.out.println(priceTwo);
+        if(priceTwo.isEmpty()) {
+            System.out.println("Is empty");
+        };
+        priceTwo.ifPresent(System.out::println);
+        System.out.println(priceTwo.orElse(40.0));
+    }
+
+    public static void tenC() {
+        Optional<Double> price3 = Optional.ofNullable(null);
+        Double z = price3.orElseThrow(() -> new RuntimeException("Bad code"));
+        System.out.println(z);
+    }
+
+    public static void eleven() {
+        List<AnotherBook> books = List.of(
+                new AnotherBook("Gone with the wind", "Fiction"),
+                new AnotherBook("Bourne Ultimatum", "Thriller"),
+                new AnotherBook("The Client", "Thriller")
+        );
+        List<String> genresList = new ArrayList<>();
+        books.stream()
+                .forEach(book -> genresList.add(book.getGenre()));
+        genresList.stream()
+                .forEach(System.out::println);
+    }
+
+    public static void twelveA() {
+        DoubleStream doubleStream = DoubleStream.of(0, 2, 4);
+        Double result = doubleStream
+                .filter(n -> n % 2 != 0 )
+                .sum();
+        System.out.println(result);
+
+    }
+
+    public static void twelveB() {
+        OptionalDouble result = Stream.of(1.0, 3.0)
+                .mapToDouble(n -> n)
+                .filter(n -> n % 2 == 0)
+                .average();
+        result.ifPresent(System.out::println);
+        System.out.println(result.orElse(0));
+    }
+
+    public static void thirteenA() {
+        List<Integer> ls = Arrays.asList(11, 11, 22, 33, 33, 55, 66);
+        boolean result = ls.stream()
+                .distinct()
+                .anyMatch(n -> n == 11);
+        System.out.println(result);
+        boolean resultTwo = ls.stream()
+                .noneMatch(n -> n % 11 > 0);
+        System.out.println(resultTwo);
+    }
+
+    public static void fourteenA() {
+        AtomicInteger atomicInteger = new AtomicInteger();
+        System.out.println(atomicInteger);
+        Stream.of(11, 11, 22, 33)
+                .parallel()
+                .filter(n -> {
+                    atomicInteger.incrementAndGet();
+                    return n % 2 == 0;
+                });
+        System.out.println(atomicInteger);
+    }
+
+    public static void fourteenB() {
+        AtomicInteger atomicInteger = new AtomicInteger();
+        Stream<Integer> stream = Stream.of(11, 11, 22, 33).parallel();
+        stream.filter(e -> {
+            atomicInteger.incrementAndGet();
+            return e % 2 == 0;
+        }).forEach(System.out::println);
+        System.out.println(atomicInteger);
+
+    }
+
 }
