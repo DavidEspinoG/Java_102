@@ -6,8 +6,7 @@ import java.util.stream.Stream;
 
 public class Assignment_three {
     public static void main(String[] args) {
-
-        eight();
+        tenB();
     }
 
     public static void one() {
@@ -139,10 +138,19 @@ public class Assignment_three {
                 new Person("Paul", "Jimenez", 32),
                 new Person("John", "Marquez", 33)
         );
-        integer result = people.stream()
+        double result = people.stream()
                 .filter(person -> person.getAge() > 30)
                 .mapToInt(person -> person.getAge())
-                .average();
+                .average().orElse(0.0);
     }
 
+    public static void tenA() {
+        Optional<Double> price = Optional.ofNullable(null);
+        if(price.isPresent()) System.out.println(price.get());
+        System.out.println(price.orElse(0.0));
+        System.out.println(price.orElseGet(() -> 0.0));
+    }
+    //public static void tenB() {
+        //Optional<Double> priceTwo = Optional.ofNullable(null);
+    //}
 }
