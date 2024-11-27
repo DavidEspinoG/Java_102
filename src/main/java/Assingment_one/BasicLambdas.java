@@ -116,17 +116,17 @@ public class BasicLambdas {
 
     private static void sortAge(List<Person> people) {
         people
-                .sort(Comparator.comparing(p -> p.getAge()));
+                .sort(Comparator.comparing(Person::getAge));
         people.forEach(System.out::println);
     }
 
     private static void sortName(List<Person> people ) {
-        people.sort(Comparator.comparing(p -> p.getName()));
+        people.sort(Comparator.comparing(Person::getName));
         people.forEach(System.out::println);
     }
 
     private static void sortHeight(List<Person> people) {
-        people.sort(Comparator.comparing(p -> p.getHeight()));
+        people.sort(Comparator.comparing(Person::getHeight));
         people.forEach(System.out::println);
     }
 
